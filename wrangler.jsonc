@@ -6,15 +6,30 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "my-qwik-app",
   "main": "./dist/_worker.js",
+  "pages_build_output_dir": "./dist",
   "compatibility_date": "2025-12-28",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "binding": "ASSET",
-    "directory": "./dist",
+    "directory": "./dist"
   },
   "observability": {
-    "enabled": true,
+    "enabled": true
   },
+  "r2_buckets": [
+    {
+      "binding": "BAITURRAHIM_DISPLAY_BUCKET",
+      "bucket_name": "baiturrahim-display"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "baiturrahim-display",
+      "database_id": "ba4d1e64-74db-4514-b4b3-8fc9b434bf3e",
+      "migrations_dir": "drizzle"
+    }
+  ]
   /**
    * Smart Placement
    * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

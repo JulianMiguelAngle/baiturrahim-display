@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 /**
  * WHAT IS THIS FILE?
  *
@@ -5,6 +7,35 @@
  * the styles in here will be applied to the Document, without any sort of CSS scoping.
  *
  */
+
+/* font family roboto */
+@font-face {
+  font-family: Roboto;
+  font-weight: 400;
+  src: url('/fonts/Roboto-Regular.woff2');
+}
+@font-face {
+  font-family: Roboto;
+  font-weight: 500;
+  src: url('/fonts/Roboto-Medium.woff2');
+}
+@font-face {
+  font-family: Roboto;
+  font-weight: 600;
+  src: url('/fonts/Roboto-SemiBold.woff2');
+}
+@font-face {
+  font-family: Roboto;
+  font-weight: 700;
+  src: url('/fonts/Roboto-Bold.woff2');
+}
+
+/* font family aladin */
+@font-face {
+  font-family: Aladin;
+  font-weight: 400;
+  src: url('/fonts/Aladin-Regular.woff2');
+}
 
 :root {
   --qwik-dark-blue: #006ce9;
@@ -14,6 +45,224 @@
   --qwik-dirty-black: #1d2033;
   --qwik-dark-background: #151934;
   --qwik-dark-text: #ffffff;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --primary: 12 6.5% 15.1%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --alert: 0 84.2% 60.2%;
+    --alert-foreground: 210 40% 98%;
+    --ring: 222.2 47.4% 11.2%;
+    --border-width: 0px;
+    --border-radius: 0;
+    --shadow-base: 0 1px 2px 0 rgba(0, 0, 0, 0.01);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    --shadow-md:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 1);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.01);
+    --transform-press: scale(0.95);
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --primary: 20 5.9% 90%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 0 0% 0%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --alert: 0 84.2% 60.2%;
+    --alert-foreground: 210 40% 98%;
+    --ring: 212.7 26.8% 83.9;
+    --border-width: 0px;
+    --border-radius: 0;
+    --shadow-base: 0 1px 2px 0 rgba(0, 0, 0, 0.01);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    --shadow-md:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 1);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.01);
+    --transform-press: scale(0.95);
+  }
+  
+  .dark {
+    color-scheme: dark;
+    background: #141414;
+  }
+  .light {
+    color-scheme: light;
+    background: #141414;
+  }
+}
+
+@layer theme {
+  .dark {
+    --color-bgContrast: #111827;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+}
+
+@theme {
+  --color-bgContrast: #fff;
+
+  --animate-from-left: slideFromLeft 0.2s 1;
+  --animate-from-right: slideFromRight 0.2s 1;
+
+  --min-width-screen-lg: 1024px;
+
+  --container-8xl: 90rem;
+
+  @keyframes slideFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* --- CUSTOM --- */
+
+  --font-roboto: 'roboto', 'serif';
+  --font-aladin: 'aladin', 'sans-serif';
+
+  --text-h1-large: 3.25rem;
+  --text-h1-large--line-height: 1.323;
+  --text-h1-large--spacing: -0.01em;
+
+  --text-h1-medium: 2.875rem;
+  --text-h1-medium--line-height: 1.323;
+  --text-h1-medium--spacing: -0.01em;
+
+  --text-h1-small: 2.562rem;
+  --text-h1-small--line-height: 1.323;
+  --text-h1-small--spacing: -0.01em;
+
+  --text-h2-large: 2.25rem;
+  --text-h2-large--line-height: 1.323;
+  --text-h2-large--spacing: -0.01em;
+
+  --text-h2-medium: 2rem;
+  --text-h2-medium--line-height: 1.323;
+  --text-h2-medium--spacing: -0.01em;
+
+  --text-h2-small: 1.812rem;
+  --text-h2-small--line-height: 1.323;
+  --text-h2-small--spacing: -0.01em;
+
+  --text-h3-large: 1.625rem;
+  --text-h3-large--line-height: 1.323;
+  --text-h3-large--spacing: -0.01em;
+
+  --text-h3-medium: 1.437rem;
+  --text-h3-medium--line-height: 1.323;
+  --text-h3-medium--spacing: -0.01em;
+
+  --text-h3-small: 1.25rem;
+  --text-h3-small--line-height: 1.323;
+  --text-h3-small--spacing: -0.01em;
+
+  --text-label-large: 1.125rem;
+  --text-label-large--line-height: 22.6px;
+  --text-label-large--spacing: 0.02em;
+
+  --text-label-medium: 1rem;
+  --text-label-medium--line-height: 1.4176;
+  --text-label-medium--spacing: 0.02em;
+
+  --text-label-small: 0.875rem;
+  --text-label-small--line-height: 1.4176;
+  --text-label-small--spacing: 0.02em;
+
+  --text-body-large: 1.125rem;
+  --text-body-large--line-height: 1.47;
+  --text-body-large--spacing: 0.02em;
+
+  --text-body-medium: 1rem;
+  --text-body-medium--line-height: 1.47;
+  --text-body-medium--spacing: 0.02em;
+
+  --text-body-small: 0.875rem;
+  --text-body-small--line-height: 1.47;
+  --text-body-small--spacing: 0.02em;
+
+  --color-primary-base: #E2F9EF;
+  --color-primary-50: #B7F0D9;
+  --color-primary-100: #8DE7C2;
+  --color-primary-200: #63DEAB;
+  --color-primary-300: #39D595;
+  --color-primary-400: #26B57A;
+  --color-primary-500: #1D8B5E;
+  --color-primary-600: #146141;
+  --color-primary-700: #104C33;
+  --color-primary-800: #0C3725;
+  --color-primary-900: #092A1C;
+  --color-primary-950: #072217;
+
+  --color-custom-neutral-base: #FFFFFF;
+  --color-custom-neutral-50: #EBEBEB;
+  --color-custom-neutral-100: #E0E0E0;
+  --color-custom-neutral-200: #D1D1D1;
+  --color-custom-neutral-300: #C7C7C7;
+  --color-custom-neutral-400: #B8B8B8;
+  --color-custom-neutral-500: #474747;
+  --color-custom-neutral-600: #3D3D3D;
+  --color-custom-neutral-700: #2E2E2E;
+  --color-custom-neutral-800: #1F1F1F;
+  --color-custom-neutral-900: #141414;
+  --color-custom-neutral-950: #0A0A0A;
 }
 
 html {
@@ -27,20 +276,74 @@ html {
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
-    "Helvetica Neue",
+    'Helvetica Neue',
     Arial,
-    "Noto Sans",
+    'Noto Sans',
     sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji";
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
 body {
   padding: 0;
   margin: 0;
   line-height: inherit;
+}
+
+@theme {
+  --animate-marquee: marquee 15s linear infinite;
+  --animate-from-left: slideFromLeft 0.2s 1;
+  --animate-from-right: slideFromRight 0.2s 1;
+
+  --min-width-screen-lg: 1024px;
+
+  --container-8xl: 90rem;
+
+  @keyframes slideFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes marquee {
+    0%{
+      transform: translateX(0);
+    }
+    100%{
+      transform: translateX(-100%);
+    }
+  }
+
+  --animate-marquee: marquee 25s linear infinite;
+
+  /* Mendefinisikan keyframes */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  --shadow-header: 0 12px 24px 0 rgba(235, 235, 235, 0.20);
+}
+
+@layer components {
+	
 }
