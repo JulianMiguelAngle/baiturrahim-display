@@ -1,3 +1,5 @@
+import { PrayerSchedule } from "./prayer";
+
 export type RunningText = {
     id: number;
     isi_teks: string;
@@ -48,16 +50,54 @@ export type Prayer = {
         id: string;
         kabko: string;
         prov: string;
-        jadwal: Record<string, {
-            tanggal: string;
-            imsak: string;
-            subuh: string;
-            terbit: string;
-            dhuha: string;
-            dzuhur: string;
-            ashar: string;
-            maghrib: string;
-            isya: string;
-        }>
+        jadwal: Record<string, PrayerSchedule>
+    }
+}
+
+export const fallbackCalendar = {
+    status: true,
+    message: "success",
+    data: {
+        method: "standar",
+        adjustment: 0,
+        ce: {
+            today: "Selasa, 26 Mei 2026",
+            day: 26,
+            dayName: "Selasa",
+            month: 5,
+            monthName: "Mei",
+            year: 2026
+        },
+        hijr: {
+            today: "Selasa, 10 Zulhijah 1447 H",
+            day: 10,
+            dayName: "Selasa",
+            month: 12,
+            monthName: "Zulhijah",
+            year: 1447
+        }
+    }
+}
+
+export const fallbackPrayerHour = {
+    status: true,
+    message: "success",
+    data: {
+        id: "82aa4b0af34c2313a562076992e50aa3",
+        kabko: "KOTA TANGERANG SELATAN",
+        prov: "BANTEN",
+        jadwal: {
+            "2026-05-26": {
+                tanggal: "Selasa, 26/05/2026",
+                imsak: "04:26",
+                subuh: "04:36",
+                terbit: "05:53",
+                dhuha: "06:22",
+                dzuhur: "11:54",
+                ashar: "15:15",
+                maghrib: "17:47",
+                isya: "19:00"
+            }
+        }
     }
 }

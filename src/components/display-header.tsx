@@ -19,7 +19,7 @@ export const DisplayHeader = component$(({
 }: DisplayHeaderProps) => {
     return (
         <header class={cn(
-        "w-full flex items-center justify-between px-8 py-6 bg-white border-b border-custom-neutral-100 font-roboto",
+        "w-full flex flex-col sm:flex-row items-center justify-between px-8 py-6 bg-white border-b border-custom-neutral-100 font-roboto",
         className
         )}>
         

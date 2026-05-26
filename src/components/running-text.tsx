@@ -49,8 +49,8 @@ export const RunningText = component$(({ teks, class: className }: RunningTextPr
     });
 
     return (
-        <div ref={marqueeRef} class={cn("relative bg-primary-700 text-primary-base w-full overflow-hidden marquee", className)}>
-            <div class="w-fit flex items-center text-nowrap inner text-h3-small font-medium font-literata py-2">
+        <div ref={marqueeRef} class={cn("py-6 relative bg-primary-700 text-primary-base w-full overflow-hidden marquee", className)}>
+            <div class="w-fit flex items-center text-nowrap inner text-h3-small font-medium font-literata">
                 <span class="content-item px-12 flex items-center gap-4">
                     {teks}
                 </span>

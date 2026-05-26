@@ -10,9 +10,3 @@ export interface PrayerSchedule {
     maghrib: string;
     isya: string;
 }
-
-export interface PrayerApiResponse {
-    kabko: string;
-    prov: string;
-    jadwal: PrayerSchedule;
-}

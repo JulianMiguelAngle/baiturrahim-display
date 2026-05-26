@@ -8,11 +8,11 @@ import { DisplayHeader } from "~/components/display-header";
 
 // import logoMasjid from '@public/Logo.avif';
 import { PrayerHour } from "~/components/prayer-hour";
-import { PrayerApiResponse, PrayerSchedule } from "~/types/prayer";
 import { FinanceInfo } from "~/components/finance-info";
 import { RunningText } from "~/components/running-text";
 import { PosterSlider } from "~/components/poster-slider";
-import { Calendar, Finance, Poster, Prayer, RunningText as RunningTextType } from "~/types/api";
+import { Calendar, fallbackCalendar, fallbackPrayerHour, Finance, Poster, Prayer, RunningText as RunningTextType } from "~/types/api";
+import { PrayerSchedule } from "~/types/prayer";
 
 
 export const useCalendarLoader = routeLoader$(async () => {
@@ -22,9 +22,9 @@ export const useCalendarLoader = routeLoader$(async () => {
         const response = await fetch(endpoint);
         const result: Calendar = await response.json();
 
-        if (!result.status) {
-            throw new Error("Gagal mengambil data kalender dari API");
-        }
+        // if (!result.status) {
+        //     throw new Error("Gagal mengambil data kalender dari API");
+        // }
 
         return {
             gregorian: result.data.ce.today,
@@ -32,11 +32,14 @@ export const useCalendarLoader = routeLoader$(async () => {
         };
     } catch (error) {
         console.error("Error Calendar Loader:", error);
-        return null;
+        return {
+            gregorian: fallbackCalendar.data.ce.today,
+            hijri: fallbackCalendar.data.hijr.today,
+        };;
     }
 });
 
-export const usePrayerLoader = routeLoader$(async (): Promise<PrayerApiResponse | null> => {
+export const usePrayerLoader = routeLoader$(async () => {
     const KOTA_ID = "82aa4b0af34c2313a562076992e50aa3";
     const endpoint = `https://api.myquran.com/v3/sholat/jadwal/${KOTA_ID}/today?tz=Asia%2FJakarta`;
 
@@ -46,16 +49,18 @@ export const usePrayerLoader = routeLoader$(async (): Promise<PrayerApiResponse 
 
         if (!result.status) throw new Error("Gagal mengambil data");
 
-        const jadwalHariIni = Object.values(result.data.jadwal)[0] as PrayerSchedule;
-
         return {
             kabko: result.data.kabko,
             prov: result.data.prov,
-            jadwal: jadwalHariIni,
+            jadwal: Object.values(result.data.jadwal)[0] as PrayerSchedule
         };
     } catch (error) {
         console.error("Error Prayer Loader:", error);
-        return null;
+        return {
+            kabko: "Tangerang Selatan",
+            prov: "Banten",
+            jadwal: fallbackPrayerHour.data.jadwal["2026-05-26"],
+        };
     }
 });
 
@@ -244,31 +249,25 @@ export default component$(() => {
     });
 
     return (
-        <div class="flex flex-col h-screen bg-custom-neutral-base overflow-hidden">
-            {calendar.value && (
-                <DisplayHeader
-                    time={currentTime.value}
-                    dateGregorian={calendar.value.gregorian}
-                    dateHijri={calendar.value.hijri}
-                    logoSrc="/Logo.avif"
-                />
-            )}
+        <div class="flex flex-col h-screen w-screen bg-custom-neutral-base overflow-hidden">
+            <DisplayHeader
+                time={currentTime.value}
+                dateGregorian={calendar.value.gregorian}
+                dateHijri={calendar.value.hijri}
+                logoSrc="/Logo.avif"
+            />
 
-            <main class="flex flex-1 flex-col lg:flex-row overflow-hidden items-stretch">
-                {prayer.value && (
-                    <PrayerHour 
-                        jadwal={prayer.value.jadwal} 
-                        class="lg:w-[320px]" 
-                    />
-                )}
+            <main class="h-full grid lg:grid-cols-[1fr_3fr_1fr] grid-rows-[1fr_3fr_1fr] lg:grid-rows-none overflow-hidden">
+                <PrayerHour 
+                    jadwal={prayer.value.jadwal} 
+                    class="lg:w-[320px]" 
+                />
 
                 <section class="flex-1 bg-white relative overflow-hidden border-x border-custom-neutral-50">
-                    {postersData.value && (
-                         <PosterSlider 
-                            posters={postersData.value}
-                            intervalSeconds={10}
-                         />
-                    )}
+                    <PosterSlider 
+                        posters={postersData.value}
+                        intervalSeconds={10}
+                    />
                 </section>
 
                 {financeData.value && (
