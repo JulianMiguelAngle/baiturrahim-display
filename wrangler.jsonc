@@ -29,7 +29,16 @@
       "database_id": "ba4d1e64-74db-4514-b4b3-8fc9b434bf3e",
       "migrations_dir": "drizzle"
     }
-  ]
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "UPDATES_DO",
+        "class_name": "UpdatesDurableObject",
+        "script_name": "baiturrahim-broker" // Ini nama project Sistem 2!
+      }
+    ]
+  }
   /**
    * Smart Placement
    * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

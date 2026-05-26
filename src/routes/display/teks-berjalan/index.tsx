@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { routeAction$, routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import { sseHub } from "~/lib/sse-hub";
 import * as v from 'valibot';
 
 import { db } from '~/lib/db';
@@ -73,7 +72,19 @@ export const useFormAction = routeAction$(
                     set: { isi_teks: result.output.isi_teks }
                 });
 
-            sseHub.emit('update', 'refresh_running_text');
+            const env = platform.env as Env;
+
+            if (env.UPDATES_DO) {
+                const doNamespace = env.UPDATES_DO;
+                const id = doNamespace.idFromName("baiturrahim-room");
+                const stub = doNamespace.get(id);
+
+                // Tembakkan request POST ke Broker
+                await stub.fetch(new Request("http://internal/broadcast", {
+                    method: "POST",
+                    body: JSON.stringify({ type: "refresh_running_text" }) // Sesuaikan tipe: refresh_poster / refresh_finance
+                }));
+            }
 
             return {
                 values,

@@ -13,7 +13,6 @@ import { useFormFeedback } from '~/hooks/use-form-feedback';
 import { Toast } from "~/components/toast";
 import { Dialog } from "~/components/dialog";
 import { PosterCard } from "~/components/poster-card";
-import { sseHub } from "~/lib/sse-hub";
 
 const posterSchema = v.object({
     gambar:
@@ -118,7 +117,19 @@ export const useFormAction = routeAction$(
                     url_gambar: `/api/posters/${fileName}`,
                 });
 
-            sseHub.emit('update', 'refresh_poster');
+            const env = platform.env as Env;
+
+            if (env.UPDATES_DO) {
+                const doNamespace = env.UPDATES_DO;
+                const id = doNamespace.idFromName("baiturrahim-room");
+                const stub = doNamespace.get(id);
+
+                // Tembakkan request POST ke Broker
+                await stub.fetch(new Request("http://internal/broadcast", {
+                    method: "POST",
+                    body: JSON.stringify({ type: "refresh_poster" }) // Sesuaikan tipe: refresh_poster / refresh_finance
+                }));
+            }
 
             return {
                 values: { ...values, gambar: undefined },
@@ -157,7 +168,19 @@ export const useDeleteAction = routeAction$(async (data, { platform, fail }) => 
         // Hapus record dari Database D1
         await database.delete(posterKegiatanTable).where(eq(posterKegiatanTable.id, id));
 
-        sseHub.emit('update', 'refresh_poster');
+        const env = platform.env as Env;
+
+        if (env.UPDATES_DO) {
+            const doNamespace = env.UPDATES_DO;
+            const id = doNamespace.idFromName("baiturrahim-room");
+            const stub = doNamespace.get(id);
+
+            // Tembakkan request POST ke Broker
+            await stub.fetch(new Request("http://internal/broadcast", {
+                method: "POST",
+                body: JSON.stringify({ type: "refresh_poster" }) // Sesuaikan tipe: refresh_poster / refresh_finance
+            }));
+        }
 
         return {
             response: { message: "Alhamdulillah, poster telah berhasil dihapus." }
@@ -223,7 +246,19 @@ export const useUpdateFormAction = routeAction$(
                 })
                 .where(eq(posterKegiatanTable.id, id));
 
-            sseHub.emit('update', 'refresh_poster');
+            const env = platform.env as Env;
+
+            if (env.UPDATES_DO) {
+                const doNamespace = env.UPDATES_DO;
+                const id = doNamespace.idFromName("baiturrahim-room");
+                const stub = doNamespace.get(id);
+
+                // Tembakkan request POST ke Broker
+                await stub.fetch(new Request("http://internal/broadcast", {
+                    method: "POST",
+                    body: JSON.stringify({ type: "refresh_poster" }) // Sesuaikan tipe: refresh_poster / refresh_finance
+                }));
+            }
 
             return {
                 values: { ...values, new_gambar: undefined },

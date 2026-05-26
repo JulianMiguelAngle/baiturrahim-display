@@ -12,7 +12,6 @@ import { Button } from "~/components/button";
 import { useFormFeedback } from '~/hooks/use-form-feedback';
 import { Toast } from "~/components/toast";
 import { Input } from "~/components/input";
-import { sseHub } from "~/lib/sse-hub";
 
 export const laporanKeuanganSchema = v.object({
     jumlah_infaq: v.pipe(
@@ -99,7 +98,19 @@ export const useFormAction = routeAction$(
                     set: result.output 
                 });
 
-            sseHub.emit('update', 'refresh_finance');
+            const env = platform.env as Env;
+
+            if (env.UPDATES_DO) {
+                const doNamespace = env.UPDATES_DO;
+                const id = doNamespace.idFromName("baiturrahim-room");
+                const stub = doNamespace.get(id);
+
+                // Tembakkan request POST ke Broker
+                await stub.fetch(new Request("http://internal/broadcast", {
+                    method: "POST",
+                    body: JSON.stringify({ type: "refresh_finance" }) // Sesuaikan tipe: refresh_poster / refresh_finance
+                }));
+            }
 
             return {
                 values,
