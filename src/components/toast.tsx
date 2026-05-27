@@ -46,8 +46,19 @@ export const Toast = component$(({ message, status, isVisible, onClose$ }: Toast
     return (
         <div 
             class={cn(
-                "fixed bottom-10 sm:right-9 z-200 transition-all duration-500",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+                // 1. Pembungkus luar dilarang mencegat klik (pointer-events-none)
+                "fixed transition-all duration-500 w-[calc(100%-2rem)] sm:w-auto pointer-events-none",
+                
+                // 2. Posisi Layar HP: Di atas, tapi diturunkan (top-24) agar header bisa diklik
+                "top-24 left-1/2 -translate-x-1/2",
+                
+                // 3. Posisi Layar Laptop: Pojok Kanan Bawah (aman dari form tengah & header)
+                "sm:top-auto sm:bottom-10 sm:left-auto sm:right-10 sm:translate-x-0",
+                
+                // 4. Efek Animasi: Turun dari atas (HP) vs Naik dari bawah (Laptop)
+                isVisible 
+                    ? "opacity-100 translate-y-0 z-200" 
+                    : "opacity-0 -translate-y-5 sm:translate-y-5 -z-20"
             )}
         >
             <div class={toastVariants({ status })}>

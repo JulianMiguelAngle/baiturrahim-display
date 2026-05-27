@@ -349,7 +349,7 @@ export default component$(() => {
 
             <div class="w-full bg-custom-neutral-100 h-px block self-center justify-self-center" />
                 
-                <div class="flex flex-col gap-6 *:grid *:grid-cols-3 *:gap-6">
+                <div class="flex flex-col gap-6 *:grid *:grid-cols-1 sm:*:grid-cols-2 lg:*:grid-cols-3 *:gap-6">
                     
                     <FormUpdate encType="multipart/form-data">
                         <FieldUpdate name="new_gambar" type="File">
