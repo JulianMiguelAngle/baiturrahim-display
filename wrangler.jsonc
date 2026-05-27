@@ -4,7 +4,7 @@
  */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "my-qwik-app",
+  "name": "baiturrahim-display",
   "main": "./dist/_worker.js",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2025-12-28",
